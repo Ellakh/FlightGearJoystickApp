@@ -10,6 +10,7 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingMethod;
 import androidx.databinding.InverseBindingMethods;
+import androidx.databinding.ObservableField;
 import java.util.regex.*;
 
 @InverseBindingMethods({
@@ -17,35 +18,42 @@ import java.util.regex.*;
 })
 
 public class ViewModel extends BaseObservable {
+    public ObservableField<Integer> rudder = new ObservableField<>();
+    public ObservableField<Integer> throttle = new ObservableField<>();
+    public ObservableField<String> ip = new ObservableField<>();
+    public ObservableField<Integer> port = new ObservableField<>();
+
     private Model mdl;
     private double aileron;
-    private int rudder;
-    private int throttle;
+    //private int rudder;
+    //private int throttle;
     private double elevator;
-    private String ip;
-    private int port;
+    //private String ip;
+    //private int port;
 
     public ViewModel(Model m){
         this.mdl = m;
     }
 
     public void setIp(String ipAddress) {
-        this.ip = ipAddress;
+        //this.ip = ipAddress;
+        this.ip.set(ipAddress);
         notifyPropertyChanged(BR.ip);
     }
 
     @Bindable
-    public String getIp() {
+    public ObservableField<String> getIp() {
         return this.ip;
     }
 
     public void setPort(int portNumber) {
-        this.port = portNumber;
+        //this.port = portNumber;
+        this.port.set(portNumber);
         notifyPropertyChanged(BR.port);
     }
 
     @Bindable
-    public int getPort() {
+    public ObservableField<Integer> getPort() {
         return this.port;
     }
 
@@ -72,7 +80,7 @@ public class ViewModel extends BaseObservable {
     }
 
     @Bindable
-    public int getThrottle() {
+    public ObservableField<Integer> getThrottle() {
         return this.throttle;
     }
 
@@ -87,7 +95,7 @@ public class ViewModel extends BaseObservable {
     }
 
     @Bindable
-    public int getRudder() {
+    public ObservableField<Integer> getRudder() {
         return this.rudder;
     }
 
@@ -113,9 +121,9 @@ public class ViewModel extends BaseObservable {
 
     public void connectToSimulator() {
         String regexExp = "[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}"; //parse string
-        if (this.port >=0 && this.port <= 65535 && Pattern.matches(regexExp, this.ip)) {
+        if (this.port.get() >=0 && this.port.get() <= 65535 && Pattern.matches(regexExp, this.ip.get())) {
             try {
-                this.mdl.connectToSimulatorInModel(this.ip, this.port);
+                this.mdl.connectToSimulatorInModel(this.ip.get(), this.port.get());
             } catch (InterruptedException e) {
                 Log.d("777", "888");
             }
