@@ -3,7 +3,6 @@ package com.example.myapplication1;
 import android.util.Log;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
@@ -59,7 +58,7 @@ public class ViewModel extends BaseObservable {
         return this.port;
     }
 
-    public void setAileronForViewModel(@NonNull double val) throws InterruptedException {
+    public void setAileronForViewModel(double val) throws InterruptedException {
         this.mdl.setAileron(val);
         //this.aileron = val;
         //notifyPropertyChanged(BR.);
@@ -123,7 +122,7 @@ public class ViewModel extends BaseObservable {
 
     public void connectToSimulator() {
         String regexExp = "[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}"; //parse string
-        if (this.port.get() >=0 && this.port.get() <= 65535 && Pattern.matches(regexExp, this.ip.get())) {
+        if (this.port != null && this.ip != null && this.port.get() >=0 && this.port.get() <= 65535 && Pattern.matches(regexExp, this.ip.get())) {
             try {
                 this.mdl.connectToSimulatorInModel(this.ip.get(), this.port.get());
             } catch (InterruptedException e) {
