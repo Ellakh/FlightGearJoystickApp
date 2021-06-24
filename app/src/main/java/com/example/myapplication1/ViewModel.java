@@ -11,6 +11,8 @@ import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingMethod;
 import androidx.databinding.InverseBindingMethods;
 import androidx.databinding.ObservableField;
+
+import java.util.Locale;
 import java.util.regex.*;
 
 @InverseBindingMethods({
@@ -101,7 +103,7 @@ public class ViewModel extends BaseObservable {
 
     @BindingAdapter("android:text")
     public static void setText(TextView text, int val) {
-        text.setText(Integer.toString(val));
+        text.setText(String.format(Locale.US ,"%d", val));
     }
 
     @InverseBindingAdapter(attribute = "android:text")
