@@ -22,7 +22,7 @@ public class ViewModel extends BaseObservable {
     public ObservableField<Integer> rudder = new ObservableField<>();
     public ObservableField<Integer> throttle = new ObservableField<>();
     public ObservableField<String> ip = new ObservableField<>();
-    public ObservableField<Integer> port = new ObservableField<>();
+    public ObservableField<Integer> port = new ObservableField<>(6400);
 
     private Model mdl;
     private double aileron;
@@ -74,6 +74,7 @@ public class ViewModel extends BaseObservable {
         //this.throttle = throttle;
         try {
             this.mdl.setThrottle(throttle / 100.0);
+            Log.d("Throttle", "newval");
         } catch (InterruptedException e) {
             Log.d("222", "333");
         }
@@ -89,6 +90,7 @@ public class ViewModel extends BaseObservable {
         //this.rudder = rudder;
         try {
             this.mdl.setRudder((rudder - 100) / 100.0);
+            Log.d("Rudder", "newval");
         } catch (InterruptedException e) {
             Log.d("444", "555");
         }
@@ -121,13 +123,14 @@ public class ViewModel extends BaseObservable {
     }
 
     public void connectToSimulator() {
-        String regexExp = "[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}"; //parse string
-        if (this.port != null && this.ip != null && this.port.get() >=0 && this.port.get() <= 65535 && Pattern.matches(regexExp, this.ip.get())) {
+        String regexExp = "[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}"; //parse string && Pattern.matches(regexExp, this.ip.get())
+        //if (this.port != null && this.ip != null && this.port.get() >=0 && this.port.get() <= 65535) {
             try {
                 this.mdl.connectToSimulatorInModel(this.ip.get(), this.port.get());
+                Log.d("JUIYGH", "yes");
             } catch (InterruptedException e) {
                 Log.d("777", "888");
             }
-        }
+        //}
     }
 }

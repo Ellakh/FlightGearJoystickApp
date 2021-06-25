@@ -18,11 +18,13 @@ public class Model {
             public void run() {
                 while (!terminate) {
                     try {
-                        if(taskQueue.isEmpty()){
+/*                        if(taskQueue.isEmpty()){
                             closeTheThread();
-                        }
+                        }*/
                         taskQueue.take().run();
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                        //terminate = true;
+                    }
                 }
             }
         }).start();

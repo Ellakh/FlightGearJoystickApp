@@ -6,8 +6,8 @@
         <variable
             name="viewModel"
             type="com.example.myapplication1.ViewModel" />
-        <!--<import type="android.view.View" />-->
     </data>
+    <!--<import type="android.view.View" />-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -103,10 +103,9 @@
             android:hint="@string/port"
             android:importantForAutofill="no"
             android:inputType="number"
-            android:digits="0123456789"
             android:text="@={viewModel.port}"
             android:textAlignment="center" />
-<!---->
+<!--            android:digits="0123456789 "-->
         <Button
             android:id="@+id/joystickButton"
             android:layout_width="wrap_content"
