@@ -1,136 +1,130 @@
 package com.example.myapplication1;
 
-import android.util.Log;
-import android.widget.SeekBar;
-import android.widget.TextView;
+// importing the required libraries
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
-import androidx.databinding.BindingAdapter;
-import androidx.databinding.InverseBindingAdapter;
-import androidx.databinding.InverseBindingMethod;
-import androidx.databinding.InverseBindingMethods;
-import androidx.databinding.ObservableField;
 
-import java.util.Locale;
-import java.util.regex.*;
-
-@InverseBindingMethods({
-        @InverseBindingMethod(type = SeekBar.class, attribute = "android:progress"),
-})
-
+// ViewModel class - the bridge between the View and the Model
 public class ViewModel extends BaseObservable {
-    public ObservableField<Integer> rudder = new ObservableField<>();
-    public ObservableField<Integer> throttle = new ObservableField<>();
-    public ObservableField<String> ip = new ObservableField<>();
-    public ObservableField<Integer> port = new ObservableField<>(6400);
-
+    // declaring a mdl field to hold a reference to the model, and rudder, throttle, ip and port fields to data-bind to
     private Model mdl;
-    private double aileron;
-    //private int rudder;
-    //private int throttle;
-    private double elevator;
-    //private String ip;
-    //private int port;
+    private int rudder;
+    private int throttle;
+    private String ip;
+    private String port;
 
+    // ViewModel - constructor of the ViewModel class
     public ViewModel(Model m){
         this.mdl = m;
+        this.rudder = 100;
     }
 
+    // setIp - sets the ip address using the given value
     public void setIp(String ipAddress) {
-        //this.ip = ipAddress;
-        this.ip.set(ipAddress);
+        this.ip = ipAddress;
         notifyPropertyChanged(BR.ip);
     }
 
+    // getIp - returns the ip address
     @Bindable
-    public ObservableField<String> getIp() {
+    public String getIp() {
         return this.ip;
     }
 
-    public void setPort(int portNumber) {
-        //this.port = portNumber;
-        this.port.set(portNumber);
+    // setPort - sets the port number using the given value
+    public void setPort(String portNumber) {
+        this.port = portNumber;
         notifyPropertyChanged(BR.port);
     }
 
+    // getPort - returns the port number
     @Bindable
-    public ObservableField<Integer> getPort() {
+    public String getPort() {
         return this.port;
     }
 
-    public void setAileronForViewModel(double val) throws InterruptedException {
+    // setAileron - sets the aileron using the given value
+    public void setAileron(double val) throws InterruptedException {
         this.mdl.setAileron(val);
-        //this.aileron = val;
-        //notifyPropertyChanged(BR.);
     }
 
-    public void setElevatorForViewModel(double val) throws InterruptedException {
+    // setElevator - sets the elevator using the given value
+    public void setElevator(double val) throws InterruptedException {
         this.mdl.setElevator(val);
-        //this.elevator = val;
-        //notifyPropertyChanged(BR.elevator);
     }
 
+    // setThrottle - sets the throttle using the given value
     public void setThrottle(int throttle) {
-        //this.throttle = throttle;
-        try {
-            this.mdl.setThrottle(throttle / 100.0);
-            Log.d("Throttle", "newval");
-        } catch (InterruptedException e) {
-            Log.d("222", "333");
-        }
+        this.throttle = throttle;
         notifyPropertyChanged(BR.throttle);
+        try {
+            // converting the value to fit the required range
+            this.mdl.setThrottle(throttle / 100.0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
+    // getThrottle - returns the throttle value
     @Bindable
-    public ObservableField<Integer> getThrottle() {
+    public int getThrottle() {
         return this.throttle;
     }
 
+    // setRudder - sets the rudder using the given value
     public void setRudder(int rudder) {
-        //this.rudder = rudder;
-        try {
-            this.mdl.setRudder((rudder - 100) / 100.0);
-            Log.d("Rudder", "newval");
-        } catch (InterruptedException e) {
-            Log.d("444", "555");
-        }
+        this.rudder = rudder;
         notifyPropertyChanged(BR.rudder);
+        try {
+            // converting the value to fit the required range
+            this.mdl.setRudder((rudder - 100) / 100.0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
+    // getRudder - returns the rudder value
     @Bindable
-    public ObservableField<Integer> getRudder() {
+    public int getRudder() {
         return this.rudder;
     }
 
-    @BindingAdapter("android:text")
-    public static void setText(TextView text, int val) {
-        text.setText(String.format(Locale.US ,"%d", val));
-    }
-
-    @InverseBindingAdapter(attribute = "android:text")
-    public static int getText(TextView text) {
-        return Integer.parseInt(text.getText().toString());
-    }
-
-    @BindingAdapter("android:progress")
-    public static void setProgress(SeekBar bar, int progress) {
-        bar.setProgress(progress);
-    }
-
-    @InverseBindingAdapter(attribute = "android:progress")
-    public static int getProgress(SeekBar bar) {
-        return bar.getProgress();
-    }
-
+    // connectToSimulator - connects the client to the server (the simulator) over TCP/IP protocol
     public void connectToSimulator() {
-        String regexExp = "[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4}"; //parse string && Pattern.matches(regexExp, this.ip.get())
-        //if (this.port != null && this.ip != null && this.port.get() >=0 && this.port.get() <= 65535) {
-            try {
-                this.mdl.connectToSimulatorInModel(this.ip.get(), this.port.get());
-                Log.d("JUIYGH", "yes");
-            } catch (InterruptedException e) {
-                Log.d("777", "888");
+        // checking if the user entered a valid ip address and port number
+        String[] ipCheck = this.ip.split("\\.");
+        if (ipCheck.length != 4) {
+            this.ip = "Please enter a valid IP";
+            notifyPropertyChanged(BR.ip);
+        } else {
+            for (String ipPart : ipCheck) {
+                try {
+                    int part = Integer.parseInt(ipPart);
+                    if (part < 0 || part > 255) {
+                        throw new NumberFormatException();
+                    }
+                } catch (NumberFormatException nfe) {
+                    this.ip = "Please enter a valid IP";
+                    notifyPropertyChanged(BR.ip);
+                    return;
+                }
             }
-        //}
+        }
+        try {
+            int portNum = Integer.parseInt(this.port);
+            if (portNum < 0 || portNum > 65535) {
+                throw new NumberFormatException();
+            }
+            // after input validation - connecting to the simulator
+            this.mdl.connectToSimulatorInModel(this.ip, Integer.parseInt(this.port));
+        } catch (NumberFormatException nfe) {
+            this.port = "Please enter a valid Port";
+            notifyPropertyChanged(BR.port);
+        } catch (InterruptedException ie) {
+            this.ip = "Connection To simulator failed";
+            notifyPropertyChanged(BR.ip);
+            this.port = "Please verify your ip and port";
+            notifyPropertyChanged(BR.port);
+        }
     }
 }

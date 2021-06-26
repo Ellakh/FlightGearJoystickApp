@@ -7,21 +7,19 @@
             name="viewModel"
             type="com.example.myapplication1.ViewModel" />
     </data>
-    <!--<import type="android.view.View" />-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <SeekBar
             android:id="@+id/rudder"
             android:layout_width="340dp"
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="30dp"
             android:layout_marginBottom="30dp"
             android:max="200"
-            android:progress="@={viewModel.rudder}" />
+            android:progress="@={viewModel.rudder, default=100}" />
 
         <SeekBar
             android:id="@+id/throttle"
@@ -32,36 +30,9 @@
             android:layout_marginStart="-150dp"
             android:layout_marginBottom="230dp"
             android:max="100"
-            android:progress="@={viewModel.throttle}"
+            android:progress="@={viewModel.throttle, default=0}"
             android:rotation="-90" />
 
- <!--(progress)-> viewModel.setThrottle(progress)
-        <FrameLayout
-            android:layout_width="30dp"
-            android:layout_height="340dp"
-            android:orientation="vertical">
-            <SeekBar
-                android:id="@+id/throttle"
-                android:layout_width="30dp"
-                android:layout_height="340dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="60dp"
-                android:max="100"
-                android:paddingStart="0dp"
-                android:paddingEnd="0dp"
-                android:progress="0"
-                android:rotation="-90" />
-    </FrameLayout>-->
-<!--
-
-
-
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:rotationX="0"
-            android:rotationY="0"
--->
         <Button
             android:id="@+id/connect"
             android:layout_width="wrap_content"
@@ -104,48 +75,17 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:text="@={viewModel.port}"
-            android:textAlignment="center" />
-<!--            android:digits="0123456789 "-->
-        <Button
-            android:id="@+id/joystickButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:textAlignment="center"
+            android:digits="0123456789."/>
+
+        <com.example.myapplication1.Joystick
+            android:id="@+id/joystick"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="161dp"
-            android:layout_marginBottom="212dp"
-            android:width="80dp"
-            android:height="80dp"
-            android:background="@drawable/circle" />
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="91dp" />
 
-        <!--        <LinearLayout
-                    class="com.example.myapplication1.Joystick"
-                    android:id="@+id/joystickLayout"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="140dp"
-                    android:layout_marginTop="204dp"
-                    android:background="@drawable/circle"
-                    android:orientation="horizontal">
-
-                    &lt;!&ndash;<include layout="@layout/circle"/>&ndash;&gt;
-                </LinearLayout>-->
-        <!--        <LinearLayout
-                    android:id="@+id/joystickLayout"
-                    android:layout_width="330dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="160dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginBottom="80dp"
-                    android:orientation="horizontal"
-                    />-->
-        <!--        <fragment
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    class="@drawable/circle.xml"/>-->
     </RelativeLayout>
-
 </layout >
