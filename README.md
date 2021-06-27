@@ -84,7 +84,8 @@ js.onChange = (x, y) -> {
 ## UML
 ![UML](https://github.com/Ellakh/FlightGearJoystickApp/blob/master/UML.png)
 
-## Video and presentation
+## Video presentation
+[Click here] to watch the presentation.
 
 
 ## Credits
@@ -99,3 +100,4 @@ Project by David Dorfman and Ella Kharakh.
    [Gradle]: <https://gradle.org/>
    [Android Gradle Plugin]: <https://gradle.org/>
    [Android SDK]: <https://developer.android.com/studio>
+   [Click here]: <https://youtu.be/W0z9mX4rGK8>
