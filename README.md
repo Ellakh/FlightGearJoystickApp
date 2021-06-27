@@ -75,7 +75,7 @@ You're welcome to do so! All you need to do is:
 - From your MainActivity's onCreate function, enter a lambda expression into the onChange field of your joystick, for example:
 ```sh
 Joystick coolJoystick = findViewById(R.id.myJoystick);
-js.onChange = (x, y) -> {
+coolJoystick.onChange = (x, y) -> {
     myViewModel.setX(x);
     myViewModel.setY(y);
 };
