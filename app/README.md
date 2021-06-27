@@ -9,7 +9,7 @@ Welcome aboard! The Flight Gear Remote Joystick Android app allows you to connec
 
 Moving the joystick up and down control the elevator value, while moving the joystick left and right control the aileron value. Moving the left slider control the throttle value, while moving the bottom slider control the rudder value.
 
-![AppScreenshot](https://github.com/Ellakh/FlightGearJoystickApp/blob/master/app/JoystickAppScreenshot.jpg =270x585)
+![AppScreenshot](https://github.com/Ellakh/FlightGearJoystickApp/blob/master/app/JoystickAppScreenshot.jpg | width=270)
 
 ## Getting Started
 The Flight Gear Remote Joystick application requires the following components:
