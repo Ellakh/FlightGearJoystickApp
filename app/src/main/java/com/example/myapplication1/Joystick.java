@@ -85,8 +85,6 @@ public class Joystick extends SurfaceView implements SurfaceHolder.Callback, Vie
                     this.draw(event.getX(), event.getY());
                     double aileron = (event.getX() - this.XPosition) / this.totalRadius,
                             elevator = (this.YPosition - event.getY()) / this.totalRadius;
-                    aileron = aileron > 1 ? 1 : (aileron < -1 ? -1 : aileron);
-                    elevator = elevator > 1 ? 1 : (elevator < -1 ? -1 : elevator);
                     this.onChange.move(aileron, elevator);
                 } else {
                     float x = this.XPosition + (event.getX() - this.XPosition) * (this.totalRadius / newRadius),
@@ -94,8 +92,6 @@ public class Joystick extends SurfaceView implements SurfaceHolder.Callback, Vie
                     this.draw(x, y);
                     double aileron = (x - this.XPosition) / this.totalRadius,
                             elevator = (this.YPosition - y) / this.totalRadius;
-                    aileron = aileron > 1 ? 1 : (aileron < -1 ? -1 : aileron);
-                    elevator = elevator > 1 ? 1 : (elevator < -1 ? -1 : elevator);
                     this.onChange.move(aileron, elevator);
                 }
             } else {
