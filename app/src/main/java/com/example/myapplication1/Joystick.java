@@ -1,5 +1,6 @@
 package com.example.myapplication1;
 
+// importing the required libraries
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

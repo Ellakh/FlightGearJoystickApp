@@ -10,22 +10,22 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import com.example.myapplication1.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements IOnChange {
+public class MainActivity extends AppCompatActivity {
     private ViewModel vm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.vm = new ViewModel(new Model());
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        Joystick joystick = new Joystick(findViewById(R.id.joystick).getContext());
-/*        joystick.onChange = (double aileron, double elevator) -> {
+        Joystick js = findViewById(R.id.joystick);
+        js.onChange = (double aileron, double elevator) -> {
             try {
                 vm.setAileron(aileron);
                 vm.setElevator(elevator);
             } catch (InterruptedException ie) {
-                //Log.d("123", "456");
+                ie.printStackTrace();
             }
-        };*/
+        };
         binding.setViewModel(vm);
         EditText ipAddress = findViewById(R.id.ip);
         EditText portNumber = findViewById(R.id.port);
@@ -83,15 +83,5 @@ public class MainActivity extends AppCompatActivity implements IOnChange {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
-    }
-
-    @Override
-    public void move(double aileron, double elevator) {
-        try {
-            vm.setAileron(aileron);
-            vm.setElevator(elevator);
-        } catch (InterruptedException ie) {
-            ie.printStackTrace();
-        }
     }
 }

@@ -1,0 +1,71 @@
+@startuml
+
+MainActivity o-- ViewModel
+ViewModel o-- Model
+AppCompatActivity <|-- MainActivity
+BaseObservable <|-- ViewModel
+SurfaceView <|-- Joystick
+Callback <|-- Joystick
+OnTouchListener <|-- Joystick
+Joystick o-- IOnChange
+
+class MainActivity {
+    - private ViewModel vm
+    # protected void onCreate(Bundle savedInstanceState)
+}
+
+class Joystick {
+    + IOnChange onChange
+    - float XPosition
+    - float YPosition
+    - float totalRadius
+    - float joystickRadius
+    - private void draw(float x, float y)
+    + public void surfaceCreated(@NonNull SurfaceHolder holder)
+    + public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height)
+    + public void surfaceDestroyed(@NonNull SurfaceHolder holder)
+    + public boolean onTouch(View v, MotionEvent event)
+}
+
+class ViewModel {
+    - Model mdl
+    - int rudder
+    - int throttle
+    - String ip
+    - String port
+    + public void setIp(String ipAddress)
+    + public String getIp()
+    + public void setPort(String portNumber)
+    + public String getPort()
+    + public void setAileron(double val)
+    + public void setElevator(double val)
+    + public void setThrottle(int throttle)
+    + public int getThrottle()
+    + public void setRudder(int rudder)
+    + public int getRudder()
+    + public void connectToSimulator()
+}
+
+class Model {
+    - BlockingQueue<Runnable> taskQueue
+    - PrintWriter printIt
+    - boolean terminate
+    + public void closeTheThread()
+    + public void setAileron(double val)
+    + public void setThrottle(double val)
+    + public void setRudder(double val)
+    + public void setElevator(double val)
+    + public void connectToSimulatorInModel(String ip, int port)
+}
+
+interface IOnChange {
+    + void move()
+}
+
+interface OnTouchListener {
+}
+
+interface Callback {
+}
+
+@enduml

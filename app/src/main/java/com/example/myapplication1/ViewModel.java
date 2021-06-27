@@ -59,7 +59,7 @@ public class ViewModel extends BaseObservable {
         notifyPropertyChanged(BR.throttle);
         try {
             // converting the value to fit the required range
-            this.mdl.setThrottle(throttle / 100.0);
+            this.mdl.setThrottle(this.throttle / 100.0);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -77,7 +77,7 @@ public class ViewModel extends BaseObservable {
         notifyPropertyChanged(BR.rudder);
         try {
             // converting the value to fit the required range
-            this.mdl.setRudder((rudder - 100) / 100.0);
+            this.mdl.setRudder((this.rudder - 100) / 100.0);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

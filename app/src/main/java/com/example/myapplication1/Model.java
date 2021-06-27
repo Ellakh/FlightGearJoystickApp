@@ -45,7 +45,7 @@ public class Model {
     }
 
     // setAileron - adds the "set aileron" send to simulator command task to the queue
-    void setAileron(double val) throws InterruptedException {
+    public void setAileron(double val) throws InterruptedException {
         if(printIt!=null){
             taskQueue.put(new Runnable() {
                 public void run() {
@@ -57,7 +57,7 @@ public class Model {
     }
 
     // setThrottle - adds the "set throttle" send to simulator command task to the queue
-    void setThrottle(double val) throws InterruptedException {
+    public void setThrottle(double val) throws InterruptedException {
         if(printIt!=null){
             taskQueue.put(new Runnable() {
                 public void run() {
@@ -69,7 +69,7 @@ public class Model {
     }
 
     // setRudder - adds the "set rudder" send to simulator command task to the queue
-    void setRudder(double val) throws InterruptedException {
+    public void setRudder(double val) throws InterruptedException {
         if(printIt!=null){
             taskQueue.put(new Runnable() {
                 public void run() {
@@ -81,7 +81,7 @@ public class Model {
     }
 
     // setElevator - adds the "set elevator" send to simulator command task to the queue
-    void setElevator(double val) throws InterruptedException {
+    public void setElevator(double val) throws InterruptedException {
         if(printIt!=null){
             taskQueue.put(new Runnable() {
                 public void run() {
@@ -93,7 +93,7 @@ public class Model {
     }
 
     // connectToSimulatorInModel - adds the connect to simulator task to the queue
-    void connectToSimulatorInModel(String ip, int port) throws InterruptedException {
+    public void connectToSimulatorInModel(String ip, int port) throws InterruptedException {
         taskQueue.put(new Runnable() {
             public void run() {
                 Socket fg = null;
