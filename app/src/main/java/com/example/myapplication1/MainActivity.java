@@ -10,13 +10,19 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import com.example.myapplication1.databinding.ActivityMainBinding;
 
+// MainActivity class - the logic of the user interface
 public class MainActivity extends AppCompatActivity {
+    // declaring a field to hold the ViewModel
     private ViewModel vm;
+
+    // onCreate - creates the user interface and the logic behind it
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // creating the ViewModel, and setting data binding to it
         this.vm = new ViewModel(new Model());
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        // setting a function to be called when the joystick moves
         Joystick js = findViewById(R.id.joystick);
         js.onChange = (aileron, elevator) -> {
             try {
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         binding.setViewModel(vm);
+        // setting listeners to the ip and port EditTexts
         EditText ipAddress = findViewById(R.id.ip);
         EditText portNumber = findViewById(R.id.port);
         ipAddress.addTextChangedListener(new TextWatcher() {
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {}
         });
+        // setting listeners to the rudder and throttle SeekBars
         SeekBar rudderBar = findViewById(R.id.rudder);
         SeekBar throttleBar = findViewById(R.id.throttle);
         rudderBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

@@ -13,8 +13,11 @@ Moving the joystick up and down control the elevator value, while moving the joy
 
 ## Getting Started
 The Flight Gear Remote Joystick application requires the following components:
-- [Flight Gear] - desktop application the simulates flights and aircrafts
+- [Flight Gear] - desktop application the simulates flights and aircraft
 - [Android Studio] - IDE for developing android applications
+- [Android Gradle Plugin] - version 4.2.1
+- [Gradle] - version 6.7.1
+- [Android SDK] - device (physical or emulated) that runs Android SDK version 22 or above
 - [Flight Gear Remote Joystick] - The Flight Gear Remote Joystick application itself
 
 ## Flight Gear Installation
@@ -81,12 +84,11 @@ js.onChange = (x, y) -> {
 ## UML
 ![UML](https://github.com/Ellakh/FlightGearJoystickApp/blob/master/app/UML.png)
 
-## Video and presentaion
+## Video and presentation
 
 
 ## Credits
-David Dorfman and Ella Kharakh.
-
+Project by David Dorfman and Ella Kharakh.
 
 [//]: #
    [Flight Gear]: <https://www.flightgear.org/>
@@ -94,3 +96,6 @@ David Dorfman and Ella Kharakh.
    [Android Studio website]: <https://developer.android.com/studio>
    [Flight Gear website]: <https://www.flightgear.org/>
    [Flight Gear Remote Joystick]: <https://github.com/Ellakh/FlightGearJoystickApp>
+   [Gradle]: <https://gradle.org/>
+   [Android Gradle Plugin]: <https://gradle.org/>
+   [Android SDK]: <https://developer.android.com/studio>
