@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         this.vm = new ViewModel(new Model());
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         Joystick js = findViewById(R.id.joystick);
-        js.onChange = (double aileron, double elevator) -> {
+        js.onChange = (aileron, elevator) -> {
             try {
                 vm.setAileron(aileron);
                 vm.setElevator(elevator);
